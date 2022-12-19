@@ -106,9 +106,6 @@ const getBooksInYear= async function (req, res) {
 //5
 const getParticularBooks= async function (req, res) {
     let a=Object.keys(req.body);
-
-    let b=a.join(" ")
-    let result=await bookModel.find()
     let arr=[]
     result.forEach((x,y,z)=>{
         if(z[y][b]==req.body[b]){
