@@ -1,29 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const customerController=require('../controllers/customerController copy')
+const cardcontroller=require('../controllers/cardController')
+const middlewares=require('../middleware/middleware')
 
-const authorController= require("../controllers/authorController")
-const bookController= require("../controllers/bookController")
-const publisherController= require("../controllers/publisherController")
+router.post("/createCustomer",customerController.createCustomer)
+
+router.get("/getCustomer",customerController.getCustomer)
+
+router.put("/updateCustomer",customerController.updateCustomer)
+
+router.put("/deleteCustomer",customerController.deleteCustomer)
 
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
-
-router.post("/createAuthor", authorController.createAuthor  )
-router.post("/createPublisher",publisherController.createPublisher )
+router.post("/createCard",middlewares.mid1,middlewares.mid2,cardcontroller.createCard)
+router.post("/getCard",cardcontroller.getCard)
 
 
-router.get("/getAuthorsData", authorController.getAuthorsData)
 
-router.post("/createBook", bookController.createBook  )
 
-router.get("/getBooksData", bookController.getBooksData)
 
-router.get("/getBooksWithAuthorDetails", bookController.getBooksWithAuthorDetails)
 
-router.put("/updatebooks",bookController.updatebooks)
-router.put("/updateprice",bookController.updateprice)
 
 
 module.exports = router;
