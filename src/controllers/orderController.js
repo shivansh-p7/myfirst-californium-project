@@ -9,7 +9,7 @@ const createOrder= async function(req,res){
     if(header==="true"){
        req.body.isFreeAppUser=true;
         let orderData= await orderModel.create(req.body);
-    res.send({data:orderData});
+      return res.send({data:orderData});
     };
     if(header==="false"){
         let productDetails=await productModel.findOne({_id:req.body.productId}).select({price:1,_id:0});
@@ -18,14 +18,14 @@ const createOrder= async function(req,res){
         let balance=userDetails.balance;
 
         if(price>balance){
-            res.send({message:"insufficient Balance"});
+          return  res.send({message:"insufficient Balance"});
         }else{
             let updateBalance= await userModel.findOneAndUpdate({_id:req.body.userId},{$inc:{balance:-price}},{new:true});
             console.log(updateBalance)
             req.body.amount=price;
             req.body.isFreeAppUser=false;
             let orderData= await orderModel.create(req.body);
-            res.send({data:orderData});
+          return  res.send({data:orderData});
         }
 
 

@@ -6,7 +6,7 @@ const headerValidator=function(req,res,next){
     let header=req.headers["isfreeappuser"];
     
     if(!header){
-       res.send({message:"Mandatory header is missing"})
+     return  res.send({message:"Mandatory header is missing"})
         
     }else{
        
@@ -20,7 +20,7 @@ const userAndProductValidator= async function(req,res,next){
         let userDetails= await userModel.findOne({_id:userId});
         let productDetails= await productModel.findOne({_id:productId});
         if(!userDetails || !productDetails){
-            res.send({message:"either productId or userId is not valid, maybe both "});
+           return res.send({message:"either productId or userId is not valid, maybe both "});
         }else{
             next();
         };
