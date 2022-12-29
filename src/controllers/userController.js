@@ -15,14 +15,14 @@ const loginUser = async function (req, res) {
     return res.send({ status: false, msg: "username or the password is not corerct", });
   let token = jwt.sign(
     {
-      userId: emailId._id,
+      userId: userDetails._id.toString(),
       batch: "califormium",
       organisation: "FunctionUp",
     },
     "shivansh-sercetKey"
   );
-  //res.setHeader("x-auth-token", token);
- return  res.send({ status: true, token: token });
+  res.setHeader("x-auth-token", token);
+ return  res.send({ status: true });
 };
 
 const getUserData = async function (req, res) {
