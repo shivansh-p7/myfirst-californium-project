@@ -11,8 +11,7 @@ const loginUser = async function (req, res) {
   let emailId = req.body.emailId;
   let password = req.body.password;
   let userDetails = await userModel.findOne({ emailId: emailId, password: password });
-  if (!userDetails)
-    return res.send({ status: false, msg: "username or the password is not corerct", });
+  if (!userDetails) return res.send({ status: false, msg: "username or the password is not corerct", });
   let token = jwt.sign(
     {
       userId: userDetails._id.toString(),
@@ -42,7 +41,7 @@ const updateUser = async function (req, res) {
   }
   let userData = req.body;
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
-  res.send({ status: updatedUser, data: updatedUser });
+  res.send({ status: true, data: updatedUser });
 };
 
 
